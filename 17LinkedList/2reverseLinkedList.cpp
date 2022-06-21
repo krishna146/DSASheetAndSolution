@@ -38,6 +38,16 @@ Node<string> *reverse(Node<string> *&head)
     }
     return prev;
 }
+Node<string> *reverseRecursively(Node<string> * prev , Node<string> *curr){
+    if(curr == NULL){
+        return prev;
+    }
+    Node<string> *forward = curr -> next;
+    curr -> next = prev;
+    return reverseRecursively(curr, forward);
+    
+
+}
 void traverse(Node<string> *&head)
 {
     Node<string> *temp = head;
@@ -56,6 +66,7 @@ int main()
     insertAtTail(tail, "sushma");
     insertAtTail(tail, "nisha");
     insertAtTail(tail, "kajal");
-    head = reverse(head);
+    Node<string> *prev = NULL;
+    head = reverseRecursively(prev, head);
     traverse(head);
 }
