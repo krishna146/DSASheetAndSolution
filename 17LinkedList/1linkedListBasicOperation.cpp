@@ -98,6 +98,18 @@ void deleteNode(Node *&head, int target)
     prev->next = temp->next;
     delete temp;
 }
+bool isCircular(Node* &head){
+    Node *temp = head;
+    while(temp != NULL)
+    {
+        if(temp -> next == head){
+            return true;
+        }
+        temp = temp -> next;
+    }
+    return false;
+    
+}
 
 int main()
 {
@@ -112,9 +124,7 @@ int main()
     insertAtHead(head, 9);
     insertAtHead(head, 11);
     traverse(head);
-    insertAtPosition(head, 9, 100);
-    traverse(head);
-    deleteNode(head, 19);
-    traverse(head);
     cout << length(head) << endl;
+    tail -> next = head;
+    cout << isCircular(head) << endl;
 }
