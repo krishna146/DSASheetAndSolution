@@ -13,6 +13,17 @@ public:
         this->next = NULL;
     }
 };
+int length(Node *&head)
+{
+    Node *temp = head;
+    int count = 0;
+    while (temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
 void insertAtHead(Node *&head, int d)
 {
     Node *temp = new Node(d);
@@ -29,26 +40,33 @@ void traverse(Node *&head)
     }
     cout << endl;
 }
-void insertAtTail(Node * &tail, int data)
+void insertAtTail(Node *&tail, int data)
 {
     Node *temp = new Node(data);
+    if (tail == NULL)
+    {
+        tail = temp;
+    }
     tail->next = temp;
     tail = temp;
 }
 void insertAtPosition(Node *&head, int pos, int data)
 {
-    // TODO:tail updation , while inserting at the end
-    // TODO :validate that position at max 1 more length greater than current length
+
     if (pos == 1)
     {
         insertAtHead(head, data);
         return;
     }
+    if (pos > length(head) + 1)
+    {
+        return;
+    }
     Node *prev = head;
-    int t = pos - 2;
-    while (t--)
+    while (pos > 2)
     {
         prev = prev->next;
+        pos--;
     }
     Node *newNode = new Node(data);
     newNode->next = prev->next;
@@ -71,37 +89,16 @@ void deleteNode(Node *&head, int target)
     }
     Node *temp = head;
     Node *prev = NULL;
-    while (temp->data != target && temp != NULL)
+    while (temp != NULL && temp->data != target)
     {
         prev = temp;
         temp = temp->next;
     }
+    if(temp == NULL) return;
     prev->next = temp->next;
     delete temp;
 }
-int length(Node *&head)
-{
-    Node *temp = head;
-    int count = 0;
-    while (temp != NULL)
-    {
-        count++;
-        temp = temp->next;
-    }
-    return count;
-}
-Node *reverse(Node *&head)
-{
-    Node *prev = NULL;
-    Node *current = head;
-    while (current != NULL)
-    {
-        Node *forward = current->next;
-        current->next = prev;
-        prev = current;
-    }
-    return prev;
-}
+
 int main()
 {
     Node *b = new Node(3);
@@ -115,15 +112,9 @@ int main()
     insertAtHead(head, 9);
     insertAtHead(head, 11);
     traverse(head);
-    insertAtPosition(head, 1, 12);
-    traverse(head);
-    insertAtPosition(head, 2, 100);
-    traverse(head);
-    insertAtPosition(head, 11, 1000);
+    insertAtPosition(head, 9, 100);
     traverse(head);
     deleteNode(head, 19);
     traverse(head);
     cout << length(head) << endl;
-    head = reverse(head);
-    traverse(head);
 }
