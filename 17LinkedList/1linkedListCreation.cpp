@@ -29,7 +29,7 @@ void traverse(Node *&head)
     }
     cout << endl;
 }
-void insertAtTail(Node *&tail, int data)
+void insertAtTail(Node * &tail, int data)
 {
     Node *temp = new Node(data);
     tail->next = temp;
