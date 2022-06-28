@@ -6,53 +6,78 @@
 #include <algorithm>
 #include <string>
 using namespace std;
-void maxScoreWords(vector<string> &words, vector<char> &letters, vector<int> &score)
+void solve(vector<string> &words, vector<int> &score, int index, int *charMap, int &ans, int &currScore)
 {
-    vector<int> arrScore;
-    for (int index = 0; index < words.size(); index++)
+    if (index == words.size())
     {
-        string currWord = words[index];
-        bool isValidWord = true;
-        unordered_map<int, bool> ump;
-        for (int j = 0; j < currWord.length(); j++)
+        ans = max(ans, currScore);
+        return;
+    }
+
+    // excluding current word
+    solve(words, score, index + 1, charMap, ans, currScore);
+
+    // including current word
+    bool isValidWord = true;
+    int visitedUpTo = -1;
+    for (auto ch : words[index])
+    {
+        if (charMap[ch - 'a'] > 0)
         {
-            char ch = currWord[j];
-            bool flag = false;
-            for (int k = 0; k < letters.size(); k++)
-            {
-                int currCh = letters[k];
-                if (ch == currCh && !ump[k])
-                {
-                    flag = true;
-                    ump[k] = true;
-                    break;
-                }
-            }
-            if (flag == false)
-            {
-                isValidWord = false;
-                break;
-            }
-            j++;
+            charMap[ch - 'a']--;
+            visitedUpTo++;
         }
-        if (isValidWord)
+        else
         {
-            int currScore = 0;
-            for (int j = 0; j < currWord.size(); j++)
-            {
-                currScore += score[currWord[j] - 'a'];
-            }
-            arrScore.push_back(currScore);
+            isValidWord = false;
+            break;
         }
     }
-    for (auto el : arrScore)
+    if (isValidWord)
     {
-        cout << el << " ";
+        int sum = 0;
+        for (int j = 0; j < words[index].size(); j++)
+        {
+            sum += score[words[index][j] - 'a'];
+        }
+        currScore += sum;
+        solve(words, score, index + 1, charMap, ans, currScore);
+        currScore -= sum;
+        // undoing the changes
+        for (int i = 0; i <= visitedUpTo; i++)
+        {
+            charMap[words[index][i] - 'a']++;
+        }
     }
+    else
+    {
+        // undoing the changes
+        for (int i = 0; i <= visitedUpTo; i++)
+        {
+            charMap[words[index][i] - 'a']++;
+        }
+        solve(words, score, index + 1, charMap, ans, currScore);
+    }
+}
+int maxScoreWords(vector<string> &words, vector<char> &letters, vector<int> &score)
+{
+    int ans = 0;
+    int currScore = 0;
+    int index = 0;
+    int charMap[26] = {};
+    for (int i = 0; i < letters.size(); i++)
+    {
+        charMap[letters[i] - 'a']++;
+    }
+    solve(words, score, index, charMap, ans, currScore);
+    return ans;
 }
 int main()
 {
-    vector<string> words = {"dog", "cat", "dad", "good"};
+    vector<string> words = {"dog",
+                            "cat",
+                            "dad",
+                            "good"};
     vector<char> letters = {'a', 'a', 'c', 'd', 'd', 'd', 'g', 'o'};
 
     vector<int> score = {1,

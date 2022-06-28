@@ -1,4 +1,4 @@
-//Problem Link - 
+//Problem Link - https://practice.geeksforgeeks.org/problems/reverse-a-stack/1/#
 /* By Krishna Kumar */
 #include<iostream>
 #include<stack>
