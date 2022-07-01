@@ -18,7 +18,7 @@ bool isSafePosition(vector<vector<int>> &sudoku, int row, int col, int val)
         {
             return false;
         }
-        if (sudoku[row / 3 * 3 + i % 3][col / 3 * 3 + i / 3] == val)
+        if (sudoku[row / 3 * 3 + i /3 ][col / 3 * 3 + i % 3] == val)
             return false;
     }
 
