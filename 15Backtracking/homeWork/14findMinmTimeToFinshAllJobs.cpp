@@ -21,7 +21,6 @@ private:
     {
         if (remWorkers == 0)
         {
-            cout <<"ans = " <<  ans << " ";
             ans = min(currMaxTime, ans);
             return;
         }
@@ -35,6 +34,7 @@ private:
         {
             findKLengthSubset(jobs, possibleAssignedJob, index, temp, k, visited);
         }
+        cout << possibleAssignedJob.size() << " ";
         for (auto jobArray : possibleAssignedJob)
         {
             int sum = 0;
