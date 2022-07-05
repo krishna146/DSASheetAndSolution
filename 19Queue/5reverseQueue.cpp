@@ -1,4 +1,4 @@
-// Problem Link -
+// Problem Link -https://practice.geeksforgeeks.org/problems/queue-reversal/1/
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
