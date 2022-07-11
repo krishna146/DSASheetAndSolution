@@ -2,9 +2,10 @@
 using namespace std;
 int main()
 {
-	deque<int> dq(5);
-	while(!dq.empty()){
-		cout << dq.front() << " ";
-		dq.pop_front();
+	unordered_map<int, int> ump;
+	ump[1] = 0;
+	ump[2] = 3;
+	for(auto el : ump){
+		cout << el.second;
 	}
 }
