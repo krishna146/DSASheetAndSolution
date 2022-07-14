@@ -15,44 +15,46 @@ struct TreeNode
 class Solution
 {
 private:
+    vector<int> ans;
+
+private:
     TreeNode *findPredecessor(TreeNode *root)
     {
-        TreeNode *predecessor = root->left;
-        while (predecessor->right && predecessor->right != root)
+        TreeNode *predecessor = root->right;
+        while (predecessor->left && predecessor->left != root)
         {
-            predecessor = predecessor->right;
+            predecessor = predecessor->left;
         }
         return predecessor;
     }
 
 public:
-    vector<int> inorderTraversal(TreeNode *root)
+    vector<int> postorderTraversal(TreeNode *root)
     {
-        vector<int> ans;
         while (root)
         {
-            if (!root->left)
+            if (!root->right)
             {
                 ans.push_back(root->val);
-                root = root->right;
+                root = root->left;
             }
             else
             {
-                TreeNode *predecessor = findPredecessor(root);
-                if (!predecessor->right)
+                TreeNode *pred = findPredecessor(root);
+                if (pred->left)
                 {
-                    predecessor->right = root;
+                    pred->left = NULL;
                     root = root->left;
                 }
                 else
                 {
-                    predecessor->right = NULL;
                     ans.push_back(root->val);
+                    pred->left = root;
                     root = root->right;
                 }
             }
         }
-
+        reverse(ans.begin(), ans.end());
         return ans;
     }
 };
