@@ -15,23 +15,6 @@ struct Node
         left = right = NULL;
     }
 };
-// Problem Link - https://practice.geeksforgeeks.org/problems/print-a-binary-tree-in-vertical-order/1
-/* By Krishna Kumar */
-#include <bits/stdc++.h>
-#include <iostream>
-using namespace std;
-struct Node
-{
-    int data;
-    struct Node *left;
-    struct Node *right;
-
-    Node(int x)
-    {
-        data = x;
-        left = right = NULL;
-    }
-};
 class Solution
 {
 public:
