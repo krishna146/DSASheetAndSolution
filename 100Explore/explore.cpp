@@ -2,5 +2,6 @@
 using namespace std;
 int main()
 {
-    
+    vector<int> num;
+    cout << num.empty();
 }
