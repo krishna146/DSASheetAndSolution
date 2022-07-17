@@ -48,7 +48,7 @@ Node *buildBST(Node *&root, int data)
     {
         root = new Node(data);
     }
-    if (data > root->data)
+    else if (data > root->data)
     {
         root->right = buildBST(root->right, data);
     }
@@ -58,7 +58,7 @@ Node *buildBST(Node *&root, int data)
     }
     return root;
 }
-Node *createBST(Node *&root)
+void createBST(Node *&root)
 {
     cout << " Enter the value of data for root Node" << endl;
     int data;
