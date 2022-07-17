@@ -84,7 +84,6 @@ int height(Node *root){
     if(root == NULL) return -1;
     return max(1 + height(root -> left) , 1 + height(root -> right));
 }
-
 int main()
 {
     Node *root = NULL;
@@ -102,4 +101,5 @@ int main()
     cout << "printing Level Order: " << endl;
     levelOrderTraversal(root);
     cout << "height of tree : " << height(root) << endl;
+    
 }
