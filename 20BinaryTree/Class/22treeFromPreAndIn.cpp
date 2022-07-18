@@ -1,4 +1,5 @@
-// Problem Link - https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+// Problem Link1 - https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+// Problem Link2 - https://practice.geeksforgeeks.org/problems/construct-tree-1/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>

@@ -1,4 +1,5 @@
-// Problem Link - https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+// Problem Link 1 - https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+//Problem Link 2 - https://practice.geeksforgeeks.org/problems/tree-from-postorder-and-inorder/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
