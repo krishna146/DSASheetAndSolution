@@ -16,38 +16,27 @@ struct Node
         right = NULL;
     }
 };
-class Solution
-{
-private:
-    int findIndex(int *inorder, int inStart, int inEnd, int target)
-    {
-        for (int i = inStart; i < inEnd; i++)
-        {
-            if (inorder[i] == target)
-            {
-                return i;
+class Solution{
+    private:
+    int leafLevel = -1;
+    private:
+    bool solve(Node* root, int currLevel){
+        if(root == NULL) return true;
+        if(!root -> left && !root -> right){
+            if(leafLevel == -1){
+                leafLevel = currLevel;
+                return true;
             }
+            return leafLevel == currLevel;
         }
+        return solve(root -> left, currLevel + 1) && solve(root -> right , currLevel + 1);
     }
-
-private:
-    Node *solve(int *inorder, int *preorder, int inStart, int inEnd, int &preStart, int &size)
+    public:
+    /*You are required to complete this method*/
+    bool check(Node *root)
     {
-        if (preStart == size || inEnd + 1 == inStart)
-            return NULL;
-        int data = preorder[preStart++];
-        Node *root = new Node(data);
-        int index = findIndex(inorder, inStart, inEnd, data);
-        root->left = solve(inorder, preorder, inStart, index - 1, preStart, size);
-        root->right = solve(inorder, preorder, index + 1, inEnd, preStart, size);
-        return root;
-    }
+        //Your code here
+        return solve(root, 0);
 
-public:
-    Node *buildTree(int in[], int pre[], int n)
-    {
-        // Code here
-        int preStart = 0;
-        return solve(in, pre, 0, n - 1, preStart, n);
     }
 };
