@@ -1,5 +1,3 @@
-// Problem Link1 - https://practice.geeksforgeeks.org/problems/height-of-binary-tree/1/
-//Problem Link2 - https://leetcode.com/problems/maximum-depth-of-binary-tree/
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>

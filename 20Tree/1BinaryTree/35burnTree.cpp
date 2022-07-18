@@ -15,7 +15,8 @@ struct Node
         left = right = NULL;
     }
 };
-class Solution
+// Approach 1 (MY approach) TC = O(N)
+class Approach1
 {
 private:
     bool findPathRootToTarget(Node *root, stack<Node *> &st, int target)
@@ -70,6 +71,79 @@ public:
                 nodeTime++;
                 temp = top;
                 ans = max(currAns, ans);
+            }
+        }
+        return ans;
+    }
+};
+// Approach2(Sir Approach)
+class Solution
+{
+private:
+    void mappingChildToParent(Node *child, Node *parent, unordered_map<Node *, Node *> &mapping)
+    {
+        if (child == NULL)
+            return;
+        mapping[child] = parent;
+        mappingChildToParent(child->left, child, mapping);
+        mappingChildToParent(child->right, child, mapping);
+    }
+
+private:
+    Node *findTarget(Node *root, int target)
+    {
+        if (root == NULL)
+            return NULL;
+        if (root->data == target)
+            return root;
+        Node *left = findTarget(root->left, target);
+        if (left)
+            return left;
+        Node *right = findTarget(root->right, target);
+        return right;
+    }
+
+public:
+    int minTime(Node *root, int target)
+    {
+        unordered_map<Node *, Node *> parent;
+        mappingChildToParent(root, NULL, parent);
+        unordered_map<Node *, bool> visited;
+        Node *targetNode = findTarget(root, target);
+        queue<Node *> q;
+        int ans = 0;
+        q.push(targetNode);
+        visited[targetNode] = true;
+        q.push(NULL);
+        while (!q.empty())
+        {
+            Node *front = q.front();
+            q.pop();
+            if (!front)
+            {
+                if (!q.empty())
+                {
+                    ans++;
+                    q.push(NULL);
+                }
+            }
+            else
+            {
+                if (front->left && !visited[front->left])
+                {
+                    q.push(front->left);
+                    visited[front->left] = true;
+                }
+                if (front->right && !visited[front->right])
+                {
+                    q.push(front->right);
+                    visited[front->right] = true;
+                }
+                if (parent[front] && !visited[parent[front]])
+                {
+                    q.push(parent[front]);
+                    visited[parent[front]] = true;
+                }
             }
         }
         return ans;
