@@ -1,4 +1,5 @@
-// Problem Link - https://practice.geeksforgeeks.org/problems/check-for-bst/1
+// Problem Link1 - https://practice.geeksforgeeks.org/problems/check-for-bst/1
+//problem Link 2 - https://leetcode.com/problems/validate-binary-search-tree/
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
