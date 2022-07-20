@@ -2,6 +2,7 @@
 using namespace std;
 int main()
 {
-    vector<int> num;
-    cout << num.empty();
+    unordered_map<int, bool> ump;
+    cout << ump[1] << endl;
+    cout << ump[1] << endl;
 }

@@ -1,4 +1,5 @@
-// Problem Link - https://leetcode.com/problems/find-duplicate-subtrees/
+// Problem Link1 - https://leetcode.com/problems/find-duplicate-subtrees/
+//Problem Link2 - https://practice.geeksforgeeks.org/problems/duplicate-subtrees/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
