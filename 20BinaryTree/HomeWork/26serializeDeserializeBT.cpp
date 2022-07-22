@@ -13,7 +13,8 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
-class Codec
+// using Preorder
+class CodecApproach1
 {
 private:
     string str;
@@ -64,5 +65,96 @@ public:
     {
         int index = 0;
         return solve(data, index);
+    }
+};
+// Using Level Order
+class CodecLevelOrder
+{
+private:
+    string str;
+
+public:
+    // Encodes a tree to a single string.
+    string serialize(TreeNode *root)
+    {
+        string str;
+        if (root == NULL)
+            return str;
+        queue<TreeNode *> q;
+        q.push(root);
+        while (!q.empty())
+        {
+            TreeNode *front = q.front();
+            q.pop();
+            if (front == nullptr)
+            {
+                str += "N,";
+            }
+            else
+            {
+                str += to_string(front->val) + ",";
+                q.push(front->left);
+                q.push(front->right);
+            }
+        }
+        return str;
+    }
+
+public:
+    // Decodes your encoded data to tree.
+    TreeNode *deserialize(string data)
+    {
+        if (data.size() == 0)
+            return NULL;
+        queue<TreeNode *> q;
+        int index = 0;
+        string temp;
+        while (data[index] != ',')
+        {
+            temp.push_back(data[index]);
+            index++;
+        }
+        index++;
+        TreeNode *root = new TreeNode(stoi(temp));
+        q.push(root);
+        while (!q.empty())
+        {
+            TreeNode *front = q.front();
+            q.pop();
+            string left, right;
+            while (data[index] != ',')
+            {
+                left.push_back(data[index]);
+                index++;
+            }
+            index++;
+            while (data[index] != ',')
+            {
+                right.push_back(data[index]);
+                index++;
+            }
+            index++;
+            if (left == "N")
+            {
+                front->left = nullptr;
+            }
+            else
+            {
+                TreeNode *leftNode = new TreeNode(stoi(left));
+                front->left = leftNode;
+                q.push(leftNode);
+            }
+            if (right == "N")
+            {
+                front->right = nullptr;
+            }
+            else
+            {
+                TreeNode *rightNode = new TreeNode(stoi(right));
+                front->right = rightNode;
+                q.push(rightNode);
+            }
+        }
+        return root;
     }
 };
