@@ -73,21 +73,59 @@ public:
             }
         }
     }
-    void heapify(int arr[], int n , int i){
-        while(index <= ){
-
+};
+void heapifyTop(vector<int> &arr, int index)
+{
+    while (index < arr.size())
+    {
+        int largest = index;
+        int leftChild = 2 * index + 1;
+        int rightChild = 2 * index + 2;
+        if (leftChild < arr.size() && arr[leftChild] > arr[largest])
+        {
+            largest = leftChild;
+        }
+        if (rightChild < arr.size() && arr[rightChild] > arr[largest])
+        {
+            largest = rightChild;
+        }
+        if (largest != index)
+        {
+            swap(arr[largest], arr[index]);
+            index = largest;
+        }
+        else
+        {
+            return;
         }
     }
-};
+}
+void buildHeap(vector<int> &arr)
+{
+    int size = arr.size();
+    for (int i = size / 2 - 1; i >= 0; i--)
+    {
+        heapifyTop(arr, i);
+    }
+    for (auto el : arr)
+    {
+        cout << el << " ";
+    }
+}
 int main()
 {
-    Heap maxHeap;
-    maxHeap.insertIntoHeap(2);
-    maxHeap.insertIntoHeap(6);
-    maxHeap.insertIntoHeap(8);
-    maxHeap.insertIntoHeap(3);
-    maxHeap.insertIntoHeap(7);
-    maxHeap.print();
-    maxHeap.deletFromHeap();
-    maxHeap.print();
+    // Heap maxHeap;
+    // maxHeap.insertIntoHeap(2);
+    // maxHeap.insertIntoHeap(6);
+    // maxHeap.insertIntoHeap(8);
+    // maxHeap.insertIntoHeap(3);
+    // maxHeap.insertIntoHeap(7);
+    // maxHeap.print();
+    // maxHeap.deletFromHeap();
+    // maxHeap.print();
+    vector<int> arr = {1, 2, 3, 4, 5, 6, 7};
+    buildHeap(arr);
+    for(auto el : arr){
+        cout << el << endl;
+    }
 }

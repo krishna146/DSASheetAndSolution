@@ -30,11 +30,6 @@ public:
 };
 int main()
 {
-   int j = 1;
-   int num1 = 4;
-   while(++j <= 10){
-    num1++;
-   }
-   cout << num1 << endl;
-   
+    vector<int> ans;
+    ans.push_back(2);   
 }
