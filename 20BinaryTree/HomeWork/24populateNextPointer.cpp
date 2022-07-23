@@ -18,7 +18,7 @@ public:
     Node(int _val, Node *_left, Node *_right, Node *_next)
         : val(_val), left(_left), right(_right), next(_next) {}
 };
-//level order traversal(each node visited two times) TC = O(2*N)
+// level order traversal(each node visited two times) TC = O(2*N) SC = O(N)
 class Approach1
 {
 public:
@@ -59,6 +59,32 @@ public:
                 if (front->right)
                     q.push(front->right);
             }
+        }
+        return root;
+    }
+};
+// TC = O(N) SC = O(1)
+class Solution
+{
+public:
+    Node *connect(Node *root)
+    {
+        if (root == NULL)
+            return root;
+        Node *temp = root;
+        while (temp->left)
+        {
+            Node *curr = temp;
+            while (curr)
+            {
+                curr->left->next = curr->right;
+                if (curr->next)
+                {
+                    curr->right->next = curr->next->left;
+                }
+                curr = curr->next;
+            }
+            temp = temp->left;
         }
         return root;
     }
