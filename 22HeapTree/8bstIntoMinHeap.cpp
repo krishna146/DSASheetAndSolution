@@ -1,4 +1,5 @@
 // Problem Link - https://www.codingninjas.com/codestudio/problems/convert-bst-to-min-heap_920498
+// Problem Link - https://www.geeksforgeeks.org/convert-bst-min-heap/
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
@@ -17,7 +18,7 @@ public:
         this->right = NULL;
         this->data = data;
     }
-}; 
+};
 BinaryTreeNode *convertBST(BinaryTreeNode *root)
 {
     BinaryTreeNode *curr = root;
