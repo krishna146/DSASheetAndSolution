@@ -1,4 +1,5 @@
-// Problem Link - https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
+// Problem Link 1 - https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
+// Problem Link 2 - https://practice.geeksforgeeks.org/problems/find-smallest-range-containing-elements-from-k-lists/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
