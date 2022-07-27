@@ -1,4 +1,5 @@
-// Problem Link -
+// Problem Link 1 - https://leetcode.com/problems/find-median-from-data-stream/
+// Problem Link 2 - https://practice.geeksforgeeks.org/problems/find-median-in-a-stream-1587115620/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
