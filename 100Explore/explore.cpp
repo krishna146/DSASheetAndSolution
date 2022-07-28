@@ -1,35 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Solution
-{
-public:
-    string solve(int N, vector<int> &A)
-    {
-        // code here
-        string yes = "YES";
-        string no = "NO";
-        int first = A[0];
-        int second = A[1];
-        if (first == -1 * second)
-        {
-            for (int i = 2; i < A.size(); i++)
-            {
-                if (i & 1 == 0 && A[i] != first)
-                {
-                    return no;
-                }
-                if (i & 1 && A[i] != second)
-                {
-                    return no;
-                }
-            }
-            return yes;
-        }
-        return no;
-    }
-};
 int main()
 {
-    vector<int> ans;
-    ans.push_back(2);   
+    pair<int, int> p = {2, 10};
+    pair<int, int> q = {7, 11};
+    pair<int, int> r = {4, 16};
+    priority_queue<pair<int,int>, vector<pair<int,int>> ,greater<pair<int,int>>> pq;
+    pq.push(p);
+    pq.push(q);
+    pq.push(r);
+    cout << pq.top().first ;
+
 }

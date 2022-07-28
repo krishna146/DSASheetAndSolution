@@ -1,9 +1,11 @@
-// Problem Link - https://leetcode.com/problems/reorganize-string/
+// Problem Link 1 - https://leetcode.com/problems/reorganize-string/
+// Problem Link 2 - https://practice.geeksforgeeks.org/problems/rearrange-characters4649/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
-class Solution
+//using simple hashing and foor loop 
+class Approach1
 {
 public:
     string reorganizeString(string s)
@@ -42,5 +44,37 @@ public:
             }
         }
         return s;
+    }
+};
+class Approach2 {
+public:
+    string reorganizeString(string s) {
+        priority_queue<pair<int, char>> maxHeap;
+        int arr[27] = {};
+        for(auto el: s){
+            arr[el - 96]++;
+        }
+        for(int i = 1 ; i < 27 ; i++){
+            if(arr[i] > 0){
+                maxHeap.push({arr[i], i + 96});
+            }
+        }
+        int index = 0;
+        pair<int, int> block = {0, '$'};
+        while(!maxHeap.empty()){
+            pair<int, int> temp = maxHeap.top();
+            maxHeap.pop();
+            s[index++] = temp.second;
+            temp.first--;
+            if(block.first > 0){
+                maxHeap.push(block);
+            }
+            block = temp;
+            
+        }
+        if(block.first > 0)
+            return "";
+        return s;
+        
     }
 };
