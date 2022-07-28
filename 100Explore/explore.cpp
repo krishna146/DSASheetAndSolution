@@ -1,14 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
+class Solution
+{
+private:
+    void solve(int *arr, int &index, int N, int mini, int maxi)
+    {
+        if (index == N)
+            return;
+        if (arr[index] > mini && arr[index] < maxi)
+        {
+            int data = arr[index++];
+            solve(arr, index, N, mini, data);
+            solve(arr, index, N, data, maxi);
+        }
+        return;
+    }
+
+public:
+    int canRepresentBST(int arr[], int N)
+    {
+        // code here
+        int index = 0;
+        solve(arr, index, N, INT_MIN, INT_MAX);
+        if (index == N)
+            return 1;
+        return 0;
+    }
+};
 int main()
 {
-    pair<int, int> p = {2, 10};
-    pair<int, int> q = {7, 11};
-    pair<int, int> r = {4, 16};
-    priority_queue<pair<int,int>, vector<pair<int,int>> ,greater<pair<int,int>>> pq;
-    pq.push(p);
-    pq.push(q);
-    pq.push(r);
-    cout << pq.top().first ;
-
+    int n;
+    cin >> n;
+    int* arr = new int[n];
+    for(int i = 0 ; i < n ; i++){
+        cin >> arr[i];
+    }
+    Solution obj;
+    cout <<"ans" << obj.canRepresentBST(arr, n);
 }
