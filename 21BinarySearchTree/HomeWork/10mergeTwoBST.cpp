@@ -1,4 +1,4 @@
-// Problem Link - https://practice.geeksforgeeks.org/problems/merge-two-bst-s/1
+// Problem Link -
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
@@ -6,33 +6,17 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node *left;
-    struct Node *right;
-};
-class Solution
-{
-private:
-    void solve(Node *root, int &k, int &ans)
-    {
-        if (root == NULL)
-            return;
-        solve(root->right, k, ans);
-        k--;
-        if (k == 0)
-            ans = root->data;
-        solve(root->left, k, ans);
-    }
+    Node *left;
+    Node *right;
 
-public:
-    int kthLargest(Node *root, int K)
+    Node(int val)
     {
-        // Your code here
-        int ans;
-        solve(root, K, ans);
-        return ans;
+        data = val;
+        left = right = NULL;
     }
 };
-class Solution
+// TC = O(N1 + N2) SC = O(N1 + N2) 
+class Approach1
 {
 private:
     vector<int> storeInorder(Node *root)
@@ -69,8 +53,6 @@ private:
     }
 
 public:
-    // Function to return a list of integers denoting the node
-    // values of both the BST in a sorted order.
     vector<int> merge(Node *root1, Node *root2)
     {
         // Your code here
@@ -100,6 +82,71 @@ public:
         {
             ans.push_back(inorder2[j]);
             j++;
+        }
+        return ans;
+    }
+};
+
+// TC = O(N1 + N2) Sc = O(H1 + H2);
+class Approach2
+{
+public:
+    vector<int> merge(Node *root1, Node *root2)
+    {
+        // Your code here
+        vector<int> ans;
+        stack<Node *> st1;
+        stack<Node *> st2;
+        while ((root1 || !st1.empty()) && (root2 || !st2.empty()))
+        {
+            while (root1)
+            {
+                st1.push(root1);
+                root1 = root1->left;
+            }
+            while (root2)
+            {
+                st2.push(root2);
+                root2 = root2->left;
+            }
+            Node *top1 = st1.top();
+            Node *top2 = st2.top();
+            if (top1->data < top2->data)
+            {
+                ans.push_back(top1->data);
+                st1.pop();
+                root1 = top1->right;
+            }
+            else
+            {
+                ans.push_back(top2->data);
+                st2.pop();
+                root2 = top2->right;
+            }
+        }
+        while (root1 || !st1.empty())
+        {
+            while (root1)
+            {
+                st1.push(root1);
+                root1 = root1->left;
+            }
+            Node *top1 = st1.top();
+            st1.pop();
+            ans.push_back(top1->data);
+            root1 = top1->right;
+        }
+        while (root2 || !st2.empty())
+        {
+            while (root2)
+            {
+                st2.push(root2);
+                root2 = root2->left;
+            }
+            Node *top2 = st2.top();
+            st2.pop();
+            ans.push_back(top2->data);
+            root2 = top2->right;
         }
         return ans;
     }

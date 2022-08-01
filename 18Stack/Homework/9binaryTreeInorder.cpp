@@ -19,24 +19,18 @@ public:
     {
         vector<int> ans;
         stack<TreeNode *> st;
-        while (1)
-        {
-            if (root == NULL && st.empty())
-                break;
-            while (root != NULL)
-            {
+        while(!st.empty() || root){
+            while(root){
                 st.push(root);
-                root = root->left;
+                root = root -> left;
             }
-            TreeNode *temp = st.top();
+            TreeNode* top = st.top();
             st.pop();
-            ans.push_back(temp->val);
-            root = temp->right;
+            ans.push_back(top -> val);
+            root = top -> right;
+            
         }
 
         return ans;
     }
 };
-int main()
-{
-}
