@@ -3,44 +3,37 @@
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
-class RandomizedSet
-{
-private:
+class RandomizedSet {
+    private:
     unordered_map<int, int> ump;
     vector<int> elements;
-
 public:
-    RandomizedSet()
-    {
+    RandomizedSet() {
+        
     }
-    bool insert(int val)
-    {
-        if (ump.find(val) != ump.end())
-            return false;
+    bool insert(int val) {
+       if(ump.find(val) != ump.end()) return false;
         int valIndex = elements.size();
         elements.push_back(val);
         ump[val] = valIndex;
         return true;
     }
-
-    bool remove(int val)
-    {
-        if (ump.find(val) == ump.end())
-            return false;
+    
+    bool remove(int val) {
+        if(ump.find(val) == ump.end()) return false;
         int valIndex = ump[val];
         int lastIndex = elements.size() - 1;
-        swap(elements[valIndex], elements[lastIndex]);
+        swap(elements[valIndex] , elements[lastIndex]);
         elements.pop_back();
+        ump[elements[valIndex]] = valIndex;
         ump.erase(val);
-        if (lastIndex != valIndex)
-            ump[elements[valIndex]] = valIndex;
         return true;
     }
-
-    int getRandom()
-    {
+    
+    int getRandom() {
         int randomNumber = rand();
         int randomIndex = (randomNumber % elements.size());
         return elements[randomIndex];
+        
     }
 };
