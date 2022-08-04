@@ -1,4 +1,4 @@
-//Problem Link - 
+//Problem Link - https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1F
 /* By Krishna Kumar */
 #include<bits/stdc++.h>
 #include<iostream>
@@ -59,12 +59,6 @@ int main(){
     for(int i = 0 ; i < 7 ; i++){
         if(!visited[i]){
             g -> bfs(i, visited);
-        }
-    }
-    visited.clear();
-    for(int i = 0 ; i < 7 ; i++){
-        if(!visited[i]){
-            g -> dfs(i, visited);
         }
     }
     
