@@ -12,37 +12,42 @@ public:
     void addEdge(int u, int v)
     {
         adjList[u].push_back(v);
-        adjList[v].push_back(u);
     }
-    bool isCyclePresent(int src, int parent, unordered_map<int, int> &visited)
-    {
+    bool isCyclePresent(int src,unordered_map<int, bool> &visited, unordered_map<int, bool> &dfsVisited){
         visited[src] = true;
+        dfsVisited[src] = true;
         for(auto neighbour: adjList[src]){
             if(!visited[neighbour]){
-                bool cycleDetectd =  isCyclePresent(neighbour, src, visited);
-                if(cycleDetectd) return true;
+                bool isCycle = isCyclePresent(src, visited, dfsVisited);
+                if(isCycle) return true;
             }
-            else if(neighbour != parent){
+            else if(dfsVisited[neighbour]){
                 return true;
             }
         }
+        dfsVisited[src] = false;
         return false;
     }
 };
 int main()
 {
     Graph *g = new Graph();
-    g->addEdge(0, 2);
-    g->addEdge(1, 3);
-    g->addEdge(2, 4);
-    g->addEdge(2, 3);
-    g->addEdge(3, 4);
-    unordered_map<int, int> visited;
-    for (int i = 0; i < 5; i++)
+    g -> addEdge(1, 2);;
+    g -> addEdge(2, 3);
+    g -> addEdge(2, 4);
+    g -> addEdge(3, 7);
+    g -> addEdge(3, 8);
+    g -> addEdge(4, 5);
+    g -> addEdge(5, 6);
+    g -> addEdge(6, 4);
+    g -> addEdge(8, 7);
+    unordered_map<int, bool> visited;
+    unordered_map<int, bool> dfsVisited;
+    for (int i = 0; i < 9; i++)
     {
         if (!visited[i])
         {
-            if (g->isCyclePresent(i, -1 , visited))
+            if (g->isCyclePresent(i, visited, dfsVisited))
             {
                 cout << "loop found";
                 break;
