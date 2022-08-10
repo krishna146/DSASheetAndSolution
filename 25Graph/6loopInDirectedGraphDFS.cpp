@@ -1,4 +1,4 @@
-// Problem Link - https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
+// Problem Link - https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
