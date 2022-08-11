@@ -11,6 +11,8 @@ public:
         unordered_map<int, bool> ump;
         int left = 0;
         int right = 0;
+
+        
         for (int right = 0; right < nums.size();)
         {
             if (right - left > k)
