@@ -1,4 +1,4 @@
-// Problem Link - https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1F
+// Problem Link - https://www.codingninjas.com/codestudio/problems/shortest-path-in-an-unweighted-graph_981297?leftPanelTab=1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
