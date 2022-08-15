@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
-void print(){
-
-}
 int main()
 {
-   int arr[] = {1, 2, 3,4};
+   pair<int, int> p = {1, 2};
+   pair<int, int> q = {3, 2};
+   bool a = (p == q);
+   cout << a;
 }
