@@ -33,7 +33,7 @@ private:
             {
                 visited[row][col + 1] = true;
                 q.push({row, col + 1});
-                F
+                
             }
             if (col - 1 >= 0 && grid[row][col - 1] == '1' && !visited[row][col - 1])
             {
