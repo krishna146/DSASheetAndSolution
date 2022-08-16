@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
-class Solution
+class SolutionBFS
 {
 public:
     vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc, int color)
@@ -47,6 +47,43 @@ public:
                 q.push({row, col - 1});
             }
         }
+        return image;
+    }
+};
+class SolutionDFS
+{
+private:
+    void dfs(vector<vector<int>> &image, vector<vector<bool>> &visited, int row, int col, int &startPixelColor, int &newColor)
+    {
+        visited[row][col] = true;
+        image[row][col] = newColor;
+        if (row + 1 < image.size() && image[row + 1][col] == startPixelColor && !visited[row + 1][col])
+        {
+            dfs(image, visited, row + 1, col, startPixelColor, newColor);
+        }
+        if (row - 1 >= 0 && image[row - 1][col] == startPixelColor && !visited[row - 1][col])
+        {
+            dfs(image, visited, row - 1, col, startPixelColor, newColor);
+        }
+        if (col + 1 < image[0].size() && image[row][col + 1] == startPixelColor && !visited[row][col + 1])
+        {
+            dfs(image, visited, row, col + 1, startPixelColor, newColor);
+        }
+        if (col - 1 >= 0 && image[row][col - 1] == startPixelColor && !visited[row][col - 1])
+        {
+            dfs(image, visited, row, col - 1, startPixelColor, newColor);
+        }
+    }
+
+public:
+    vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc, int newColor)
+    {
+        // Code here
+        int startPixelColor = image[sr][sc];
+        int rowCount = image.size();
+        int colCount = image[0].size();
+        vector<vector<bool>> visited(rowCount, vector<bool>(colCount, false));
+        dfs(image, visited, sr, sc, startPixelColor, newColor);
         return image;
     }
 };
