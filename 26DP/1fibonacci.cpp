@@ -26,6 +26,7 @@ int getFibonacciBottomUP(int n){
     vector<int> dp(n + 1, 0);
     //step 2
     dp[0] = 0;
+    
     dp[1] = 1;
     //step3
     for(int i = 2 ; i <= n ; i++){
@@ -56,5 +57,6 @@ int main(){
     cout << getFibonacciDP(n, dp) << endl;
     cout << getFibonacciBottomUP(n) << endl;
     cout << getFibonacciRecursion(n) << endl;
+    cout << getFibonacciSpaceOptimization(n) << endl;
 
 }
