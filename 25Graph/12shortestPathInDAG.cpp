@@ -1,8 +1,3 @@
-// Problem Link - https://practice.geeksforgeeks.org/problems/negative-weight-cycle3504/1
-/* By Krishna Kumar */
-#include <bits/stdc++.h>
-#include <iostream>
-using namespace std;
 // Problem Link -
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
@@ -12,6 +7,19 @@ class graph
 {
 private:
     unordered_map<int, list<pair<int, int>>> adjList;
+    void findTopoSortSequence(int src, vector<int> &topoSequence, unordered_map<int, bool> &visited)
+    {
+        visited[src] = true;
+        for (auto neighbour : adjList[src])
+        {
+            int vertex = neighbour.first;
+            if (!visited[vertex])
+            {
+                findTopoSortSequence(vertex, topoSequence, visited);
+            }
+        }
+        topoSequence.push_back(src);
+    }
 
 public:
     void addEdge(int u, int v, int wt)
@@ -33,30 +41,26 @@ public:
     }
     vector<int> findShortestPath(int src, int n)
     {
+        // step1: find Topo Sort Sequence;
+        unordered_map<int, bool> visited;
+        vector<int> topoSequence;
         vector<int> distTo(n + 1, INT_MAX);
-        distTo[src] = 0;
-        for (int i = 0; i < n - 1; i++)
+        for (int i = 0; i <= n; i++)
         {
-            for (auto vertex : adjList)
+            if (!visited[i])
             {
-                for (auto neighbour : vertex.second)
-                {
-                    if (distTo[vertex.first] != INT_MAX && distTo[vertex.first] + neighbour.second < distTo[neighbour.first])
-                    {
-                        distTo[neighbour.first] = distTo[vertex.first] + neighbour.second;
-                    }
-                }
+                findTopoSortSequence(i, topoSequence, visited);
             }
         }
-        for (auto vertex : adjList)
+        reverse(topoSequence.begin(), topoSequence.end());
+        distTo[src] = 0;
+        for (auto vertex : topoSequence)
         {
-            for (auto neighbour : vertex.second)
+            for (auto neighbour : adjList[vertex])
             {
-                if (distTo[vertex.first] != INT_MAX && distTo[vertex.first] + neighbour.second < distTo[neighbour.first])
+                if (distTo[vertex] != INT_MAX && distTo[vertex] + neighbour.second < distTo[neighbour.first])
                 {
-                    distTo[neighbour.first] = distTo[vertex.first] + neighbour.second;
-                    cout << "Graph contain negative weight cycle and calculated distance is wrong " << endl;
-                    break;
+                    distTo[neighbour.first] = distTo[vertex] + neighbour.second;
                 }
             }
         }
