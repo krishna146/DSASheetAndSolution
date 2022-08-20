@@ -30,6 +30,7 @@ public:
             cout << endl;
         }
     }
+    // Using Set Data Structure
     vector<int> dijkstra(int src, int n)
     {
         vector<int> dist(n, INT_MAX);
@@ -63,7 +64,29 @@ public:
     }
     vector<int> dijkstraUsingHeap(int src, int n)
     {
-        vector<int> dist
+        vector<int> dist(n, INT_MAX);
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+        dist[src] = 0;
+        minHeap.push({0, src});
+        while (!minHeap.empty())
+        {
+            auto front = minHeap.top();
+            minHeap.pop();
+            int tempSource = front.second;
+            int tempSourceDistanceFromSource = front.first;
+            for (pair<int, int> neighbour : adjList[tempSource])
+            {
+                int neighbourVertex = neighbour.first;
+                int neighbourVertexDistanceFromTempSource = neighbour.second;
+                int ExistingNeighbourVertexDistanceFromSource = dist[neighbourVertex];
+                if (tempSourceDistanceFromSource + neighbourVertexDistanceFromTempSource < ExistingNeighbourVertexDistanceFromSource)
+                {
+                    dist[neighbourVertex] = tempSourceDistanceFromSource + neighbourVertexDistanceFromTempSource;
+                    minHeap.push({dist[neighbourVertex], neighbourVertex});
+                }
+            }
+        }
+        return dist;
     }
 };
 int main()
@@ -76,8 +99,13 @@ int main()
     g->addEdge(2, 3, 6, false);
     cout << "printing adjaceny list : " << endl;
     g->printADj();
-    vector<int> distance = g -> dijkstra(0, 4);
-    for(auto dist : distance){
+    vector<int> distance = g->dijkstra(0, 4);
+    for (auto dist : distance)
+    {
+        cout << dist << " ";
+    }cout << endl;
+    vector<int> ans = g -> dijkstraUsingHeap(0, 4);
+    for(auto dist: ans){
         cout << dist << " ";
     }
 }
