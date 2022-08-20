@@ -1,4 +1,4 @@
-// Problem Link -
+// Problem Link -https://practice.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
@@ -30,13 +30,13 @@ public:
             cout << endl;
         }
     }
-    // Using Set Data Structure
+    // Using Set Data Structure TC = O((V + E)logv) SC = O(V)
     vector<int> dijkstra(int src, int n)
     {
         vector<int> dist(n, INT_MAX);
         set<pair<int, int>> st;
         dist[src] = 0;
-        st.insert({0, 0});
+        st.insert({0, src});
         while (!st.empty())
         {
             auto top = *st.begin();
@@ -62,6 +62,7 @@ public:
         }
         return dist;
     }
+    //Using Heap Data Structure TC = O((V + E)LogV) SC = O(V)
     vector<int> dijkstraUsingHeap(int src, int n)
     {
         vector<int> dist(n, INT_MAX);
@@ -70,19 +71,16 @@ public:
         minHeap.push({0, src});
         while (!minHeap.empty())
         {
-            auto front = minHeap.top();
+
+            int vertex = minHeap.top().second;
+            int distToVertex = minHeap.top().first;
             minHeap.pop();
-            int tempSource = front.second;
-            int tempSourceDistanceFromSource = front.first;
-            for (pair<int, int> neighbour : adjList[tempSource])
+            for (pair<int, int> neighbour : adjList[vertex])
             {
-                int neighbourVertex = neighbour.first;
-                int neighbourVertexDistanceFromTempSource = neighbour.second;
-                int ExistingNeighbourVertexDistanceFromSource = dist[neighbourVertex];
-                if (tempSourceDistanceFromSource + neighbourVertexDistanceFromTempSource < ExistingNeighbourVertexDistanceFromSource)
+                if (distToVertex + neighbour.second < dist[neighbour.first])
                 {
-                    dist[neighbourVertex] = tempSourceDistanceFromSource + neighbourVertexDistanceFromTempSource;
-                    minHeap.push({dist[neighbourVertex], neighbourVertex});
+                    dist[neighbour.first] = distToVertex + neighbour.second;
+                    minHeap.push({dist[neighbour.first], neighbour.first});
                 }
             }
         }
