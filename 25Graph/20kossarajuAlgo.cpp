@@ -1,4 +1,4 @@
-//Problem Link - https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+//Problem Link - https://practice.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1
 /* By Krishna Kumar */
 #include<bits/stdc++.h>
 #include<iostream>
@@ -6,7 +6,7 @@ using namespace std;
 template<typename T>
 class Graph{
     public:
-    map<T, list<T>> adjList;
+    unordered_map<T, list<T>> adjList;
     void addEdge(T u, T v, bool direction){
         adjList[u].push_back(v);
         if(!direction){
@@ -22,28 +22,27 @@ class Graph{
             cout << endl;
         }
     }
-    void dfs(int source, unordered_map<int, bool> &visited, stack<int> &st){
+    void findTopoSequence(int source, unordered_map<int, bool> &visited, stack<int> &st){
         visited[source] = true;
         for(auto adj : adjList[source]){
             if(!visited[adj]){
-                dfs(adj, visited);
+                findTopoSequence(adj, visited, st);
             }
         }
         st.push(source);
     }
-    void revDfs(int source, unordered_map<int, bool> &visited){
+    void dfs(int source, unordered_map<int, bool> &visited, unordered_map<int, list<int>> &newAdjList){
         visited[source] = true;
-        for(auto adj : adjList[source]){
-            if(!visited[adj]){
-                dfs(adj, visited);
+        for(auto neighbour : newAdjList[source]){
+            if(!visited[neighbour]){
+                dfs(neighbour, visited, newAdjList);
             }
         }
-
     }
-    void findTranspose(unordered_map<int, list<int>> &newAdjList){
+    void findTranspose(unordered_map<int, list<int> > &newAdjList){
         for(auto v: adjList){
-            for(auto neighbour: adjList[v.first]){
-                newAdjList[neighbour].push()
+            for(auto neighbour: v.second){
+                newAdjList[neighbour].push_back(v.first);
             }
         }
     }
@@ -57,14 +56,13 @@ int main(){
     g -> addEdge(1, 2, true);
     g -> addEdge(2, 0, true);
     g -> addEdge(2, 3, true);
-    g -> addEdge(3, 4, false);
+    g -> addEdge(3, 4, true);
     //topo Ordering
     int n = 5;
     stack<int> st;
-    unordered_map<int, bool> visited;
     for(int i = 0 ; i < n ; i++){
         if(!visited[i]){
-            g -> dfs(i, visited, st);
+            g -> findTopoSequence(i, visited, st);
         }
     }
     //transpose
@@ -77,11 +75,9 @@ int main(){
         int node = st.top();
         st.pop();
         if(!visited[node]){
-            g -> revDfs(i, visited);
+            g -> dfs(node, visited, newAdjList);
+            scc++;
         }
     }
     cout << scc << endl;
-    
-    
-
 }
