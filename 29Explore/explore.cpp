@@ -2,8 +2,10 @@
 using namespace std;
 int main()
 {
-   pair<int, int> p = {1, 2};
-   pair<int, int> q = {3, 2};
-   bool a = (p == q);
-   cout << a;
+int j = 1, num1 = 4;  
+while (++j <= 10)  
+{  
+  num1++;  
+}  
+cout << num1;
 }
