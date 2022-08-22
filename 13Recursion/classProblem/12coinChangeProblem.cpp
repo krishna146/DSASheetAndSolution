@@ -14,7 +14,7 @@ int countWays(int coins[],int size,  int totalAmount,int parent){
     return ways;
 }
 int main(){
-    int coins[] = {1, 2};
+    int coins[] = {1, 2, 3};
     int size = sizeof(coins) / sizeof(int);
     int totalAmount = 4;
     cout << countWays(coins,size,  totalAmount, 0);
