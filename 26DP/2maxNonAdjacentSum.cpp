@@ -6,8 +6,7 @@
 using namespace std;
 class Solution
 {
-public:
-    // calculate the maximum sum with out adjacent
+
 private:
     int recursive(int *arr, int size, int index)
     {
