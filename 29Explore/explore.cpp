@@ -2,10 +2,7 @@
 using namespace std;
 int main()
 {
-int j = 1, num1 = 4;  
-while (++j <= 10)  
-{  
-  num1++;  
-}  
-cout << num1;
+  vector<int> arr = {1,1, 2, 4, 6, 7, 8 , 20};
+  int idx = lower_bound(arr.begin(), arr.end(), 21) - arr.begin();
+  cout << idx << endl;
 }
