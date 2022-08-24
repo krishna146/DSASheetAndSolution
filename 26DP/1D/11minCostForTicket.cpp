@@ -1,4 +1,4 @@
-// Problem Link -
+// Problem Link - https://leetcode.com/problems/minimum-cost-for-tickets/
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
