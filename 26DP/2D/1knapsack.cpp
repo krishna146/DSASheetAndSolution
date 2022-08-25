@@ -1,4 +1,4 @@
-// Problem Link - https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
+// Problem Link - https://practice.gee/'  ksforgeeks.org/problems/0-1-knapsack-problem0945/1
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
@@ -33,6 +33,24 @@ private:
         return dp[index][capacity] = max(include, exclude);
     }
     int bottomUp(int capacity, int *wt, int *val, int n)
+    {
+        vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0));
+        for (int index = n - 1; index >= 0; index--)
+        {
+            for (int cap = 1; cap <= capacity; cap++)
+            {
+                int include = 0;
+                if (wt[index] <= cap)
+                {
+                    include = val[index] + dp[index + 1][cap - wt[index]];
+                }
+                int exclude = dp[index + 1][cap];
+                dp[index][cap] = max(include, exclude);
+            }
+        }
+        return dp[0][capacity];
+    }
+    int sapceOptimized(int capacity, int *wt, int *val, int n)
     {
         vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0));
         for (int index = n - 1; index >= 0; index--)
