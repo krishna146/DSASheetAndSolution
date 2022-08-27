@@ -2,7 +2,6 @@
 using namespace std;
 int main()
 {
-  int dest = 2;
-  int n = 5;
-  cout << ceil(dest  * 1.0 / n );
+  vector<int> nums = {1, 2, 3, 4};
+  cout << nums.back();
 }
