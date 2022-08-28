@@ -6,5 +6,6 @@ Binary Search
 2D array
 Recursion
 Backtracking 
-Liked List
+Linked List
 Stack
+Recursion
