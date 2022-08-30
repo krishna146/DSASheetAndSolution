@@ -9,4 +9,5 @@ Backtracking
 Linked List
 Stack
 Recursion 
+Heap
 Dynamic Programming 
