@@ -15,6 +15,7 @@ public:
             int temp = arr[i] - difference;
             dp[arr[i]] = 1 + dp[temp];
             ans = max(dp[arr[i]], ans);
+            
         }
         return ans;
     }
