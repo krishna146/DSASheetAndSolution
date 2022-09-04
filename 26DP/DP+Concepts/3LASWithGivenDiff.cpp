@@ -1,5 +1,6 @@
 // Problem Link - https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/
 /* By Krishna Kumar */
+//DP + hashing
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
