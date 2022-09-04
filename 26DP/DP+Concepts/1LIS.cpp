@@ -1,5 +1,6 @@
 // Problem Link - https://leetcode.com/problems/longest-increasing-subsequence/
 /* By Krishna Kumar */
+// Concept : Dp + binary search
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
