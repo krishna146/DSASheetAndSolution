@@ -2,6 +2,7 @@
 using namespace std;
 int main()
 {
-  vector<int> nums = {1, 2, 3, 4};
-  cout << nums.back();
+
+  float /*hi*/ a = 20.0;
+  cout << a ;
 }
