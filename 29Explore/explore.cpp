@@ -1,8 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
+int fact(static int n){
+  if(n == 1) return 1;
+  return n * fact(n - 1);
+}
 int main()
 {
-
-  float /*hi*/ a = 20.0;
-  cout << a ;
+   cout << fact(6);
 }
