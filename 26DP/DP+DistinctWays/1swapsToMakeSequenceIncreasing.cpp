@@ -1,4 +1,4 @@
-// Problem Link - https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/F
+// Problem Link - https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/
 /* By Krishna Kumar */
 #include <bits/stdc++.h>
 #include <iostream>
